@@ -6,6 +6,7 @@ export default LinkComponent.extend({
   tagName: 'li',
   layout: layout,
   attributeBindings: ['data-toggle', 'data-target'],
+  router: service(),
   
   hrefForA: computed('models', 'qualifiedRouteName', function computeLinkToComponentHref() {
     let qualifiedRouteName = this.get('qualifiedRouteName');
@@ -17,6 +18,6 @@ export default LinkComponent.extend({
 
     let routing = this.get('_routing');
     let queryParams = this.get('queryParams.values');
-    return routing.generateURL(qualifiedRouteName, models, queryParams);
+    return this.router.urlFor(qualifiedRouteName, models, queryParams);
   })
 });
